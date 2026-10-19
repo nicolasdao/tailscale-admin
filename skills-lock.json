@@ -1,14 +1,14 @@
 {
 	"lockVersion": 2,
-	"generatedAt": "2026-10-19T08:15:19.649Z",
+	"generatedAt": "2026-10-19T08:46:12.779Z",
 	"skills": {
 		"nicolasdao/tailscale-admin": {
-			"version": "0.1.0",
-			"ref": "refs/tags/v0.1.0",
-			"commit": "1501cffa183222dfa4b776a806612e50406ebc0226bb8925c3943c587434f939",
-			"integrity": "sha256-291ddedbc2e340bffa68e87770873f10176cf15fc065ae76c8429a0fcc9af2ce",
-			"base_commit": "1501cffa183222dfa4b776a806612e50406ebc0226bb8925c3943c587434f939",
-			"base_integrity": "sha256-291ddedbc2e340bffa68e87770873f10176cf15fc065ae76c8429a0fcc9af2ce",
+			"version": "0.2.0",
+			"ref": "refs/tags/v0.2.0",
+			"commit": "68dacf480a877ed937ea425e3273229f1bf8f43c9325ec7c0693226a43a2cfbf",
+			"integrity": "sha256-12858df66c117d271a635f5200c502667db372d4b289fc19be819c2e4efc9e15",
+			"base_commit": "68dacf480a877ed937ea425e3273229f1bf8f43c9325ec7c0693226a43a2cfbf",
+			"base_integrity": "sha256-12858df66c117d271a635f5200c502667db372d4b289fc19be819c2e4efc9e15",
 			"requested_by": [
 				"__root__"
 			],
