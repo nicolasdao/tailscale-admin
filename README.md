@@ -59,3 +59,7 @@ node .agents/skills/tailscale-admin/scripts/tsa.mjs self-audit        # API drif
 ```
 
 Research and design notes are in [`docs/`](docs/).
+
+## License
+
+[BSD-3-Clause](LICENSE) © Nicolas Dao
