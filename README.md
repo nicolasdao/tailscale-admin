@@ -37,6 +37,13 @@ npx -y happyskills install nicolasdao/tailscale-admin
 
 Or copy `.agents/skills/tailscale-admin/` into your agent's skills folder.
 
+**After installing**, the skill needs one Tailscale OAuth client. Your agent walks you through it; about 5 minutes in the admin console.
+- Install creates the secrets file **with empty placeholders**, git-ignored:
+  - `<project>/secrets/tailscale-admin.env` for a project install;
+  - `~/.agents/secrets/tailscale-admin.env` for a global install.
+- You paste the client ID and secret into that file yourself. They never go through the chat.
+- The full guide covers the exact console steps and scopes, how to lock the file to mode 600, and how to keep the secrets somewhere else (another path, one global file for all projects, or environment variables): [setup](.agents/skills/tailscale-admin/references/setup.md).
+
 ## Usage
 
 Ask your agent things like "set up a subnet router for 10.60.0.0/16", "approve the route on my router", "create a Tailscale auth key for tag:ci" or "add a tag owner". Or run the script directly:

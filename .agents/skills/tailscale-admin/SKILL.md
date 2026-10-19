@@ -31,7 +31,12 @@ This skill is **not** for the local node (`tailscale up`, `set`, `serve`, `statu
 
 For this skill, `<owner>/<name>` is `nicolasdao/tailscale-admin`. `tsa.mjs` already implements this resolution and loads the secrets itself. Run `tsa auth check`; it reports `credentials_missing` (with the file and variable names) or the granted scopes.
 
-- **Secrets:** `TAILSCALE_OAUTH_CLIENT_ID` and `TAILSCALE_OAUTH_CLIENT_SECRET` (an OAuth client). If they are missing, walk the user through [references/setup.md](references/setup.md). The user edits the env file themselves; never ask for the secret in chat.
+- **Secrets:** `TAILSCALE_OAUTH_CLIENT_ID` and `TAILSCALE_OAUTH_CLIENT_SECRET`, from an OAuth client that only a person can create in the Tailscale console.
+  - Install creates the secrets file **with both values empty**, git-ignored:
+    - `<project>/secrets/tailscale-admin.env` for a project install;
+    - `~/.agents/secrets/tailscale-admin.env` for a global install.
+  - **Right after install** (the install returns `next_step.action: complete_manual_setup`), and whenever a command returns `credentials_missing`, walk the user through [references/setup.md](references/setup.md) step by step. It also covers locking the file to mode 600 and moving it elsewhere.
+  - The user types the values into the file themselves. Never ask for the secret in chat.
 - **Config:**
   - `tailnet` (default `-`)
   - `automationTag` (default `tag:tailscale-admin`, the OAuth client's tag)

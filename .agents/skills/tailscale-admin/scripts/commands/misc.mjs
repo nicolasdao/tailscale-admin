@@ -1,9 +1,18 @@
 // auth check, users list, dns get, settings get.
+import fs from 'node:fs'
 import { grantedScopes, request } from '../lib/api.mjs'
 import { loadCredentials } from '../lib/env.mjs'
 import { tn } from '../lib/flow.mjs'
 import { opts } from '../lib/args.mjs'
 import { TsaError } from '../lib/out.mjs'
+
+// Install creates the secrets file group/world-readable; flag it (POSIX only) with the exact fix.
+function permissionWarning(file) {
+	if (process.platform === 'win32' || !fs.existsSync(file)) return undefined
+	const mode = fs.statSync(file).mode & 0o777
+	if (!(mode & 0o077)) return undefined
+	return `${file} is readable by other users on this machine (mode ${mode.toString(8)}). Run: chmod 600 "${file}"`
+}
 
 export async function run(group, [verb], flags) {
 	const o = opts(flags)
@@ -11,8 +20,9 @@ export async function run(group, [verb], flags) {
 	switch (key) {
 		case 'auth check': {
 			const { source, missing } = loadCredentials()
-			if (missing.length) return { ok: false, status: 'credentials_missing', envFile: source, missing }
-			return { ok: true, envFile: source, grantedScopes: await grantedScopes([]) }
+			const warning = permissionWarning(source)
+			if (missing.length) return { ok: false, status: 'credentials_missing', envFile: source, missing, next: 'Fill in the empty values in envFile (see references/setup.md), then re-run auth check.', ...(warning ? { warning } : {}) }
+			return { ok: true, envFile: source, grantedScopes: await grantedScopes([]), ...(warning ? { warning } : {}) }
 		}
 		case 'users list': {
 			const r = await request('GET', `/tailnet/${tn(o)}/users`, { scopes: ['users:read'] })
