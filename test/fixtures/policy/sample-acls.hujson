@@ -1,0 +1,7 @@
+{
+  // Legacy ACL syntax, two-space indent, no trailing commas
+  "acls": [
+    {"action": "accept", "src": ["autogroup:admin"], "dst": ["*:*"]}
+  ],
+  "tagOwners": {"tag:web": ["autogroup:admin"]}
+}
