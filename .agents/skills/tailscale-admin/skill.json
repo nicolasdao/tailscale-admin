@@ -1,0 +1,57 @@
+{
+	"name": "tailscale-admin",
+	"version": "0.1.0",
+	"description": "Administer a Tailscale tailnet through its API: comment-preserving policy file edits, auth keys, devices, subnet routes, DNS, plus a subnet-router recipe and generic access to every API operation.",
+	"type": "skill",
+	"dependencies": {},
+	"systemDependencies": {
+		"node": {
+			"description": "Node.js runtime (built-in fetch and node:test)",
+			"version": ">=18.0.0",
+			"check": "node --version",
+			"install": {
+				"darwin": "brew install node",
+				"linux": "See https://nodejs.org/en/download for install instructions",
+				"win32": "winget install OpenJS.NodeJS.LTS"
+			}
+		}
+	},
+	"env": {
+		"TAILSCALE_OAUTH_CLIENT_ID": {
+			"required": true,
+			"secret": true,
+			"description": "Client ID of the Tailscale OAuth client (Settings, Trust credentials)",
+			"setupGuide": "references/setup.md",
+			"verify": "node scripts/tsa.mjs auth check"
+		},
+		"TAILSCALE_OAUTH_CLIENT_SECRET": {
+			"required": true,
+			"secret": true,
+			"description": "Secret of the Tailscale OAuth client (tskey-client-...), shown once at creation",
+			"setupGuide": "references/setup.md",
+			"verify": "node scripts/tsa.mjs auth check"
+		}
+	},
+	"config": {
+		"tailnet": {
+			"type": "string",
+			"default": "-",
+			"description": "Tailnet ID to administer; - means the credential's own tailnet"
+		},
+		"automationTag": {
+			"type": "string",
+			"default": "tag:tailscale-admin",
+			"description": "Tag carried by the OAuth client; it must own every tag the skill mints keys for"
+		},
+		"operatorGroup": {
+			"type": "string",
+			"default": "group:db-operators",
+			"description": "Policy group used as the source of access rules the recipes create"
+		},
+		"keyExpiry": {
+			"type": "string",
+			"default": "1d",
+			"description": "Default expiry for new auth keys (e.g. 1h, 1d, 7d; max 90d)"
+		}
+	}
+}

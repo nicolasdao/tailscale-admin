@@ -1,0 +1,1207 @@
+{
+	"source": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+	"version": "v2",
+	"generated": "2026-10-19",
+	"count": 93,
+	"operations": [
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/devices",
+			"operationId": "listTailnetDevices",
+			"tag": "Devices",
+			"summary": "List tailnet devices",
+			"scopes": [
+				"devices:core:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "43353961518432ce"
+		},
+		{
+			"method": "DELETE",
+			"path": "/tailnet/{tailnet}",
+			"operationId": "deleteTailnet",
+			"tag": "Organizations",
+			"summary": "Delete a tailnet",
+			"scopes": [
+				"all"
+			],
+			"badges": [
+				"Alpha"
+			],
+			"deprecated": false,
+			"fp": "b6d5d4287933e082"
+		},
+		{
+			"method": "PATCH",
+			"path": "/tailnet/{tailnet}/device-attributes",
+			"operationId": "batchUpdateCustomDevicePostureAttributes",
+			"tag": "Devices",
+			"summary": "Batch update custom device posture attributes",
+			"scopes": [
+				"devices:posture_attributes"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c7a7f8c67a63c952"
+		},
+		{
+			"method": "GET",
+			"path": "/device/{deviceId}",
+			"operationId": "getDevice",
+			"tag": "Devices",
+			"summary": "Get a device",
+			"scopes": [
+				"devices:core:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "87a8b874affefd12"
+		},
+		{
+			"method": "DELETE",
+			"path": "/device/{deviceId}",
+			"operationId": "deleteDevice",
+			"tag": "Devices",
+			"summary": "Delete a device",
+			"scopes": [
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "d21e6013f23e5b9a"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/expire",
+			"operationId": "expireDeviceKey",
+			"tag": "Devices",
+			"summary": "Expire a device's key",
+			"scopes": [
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "1b131d9cce39d8e2"
+		},
+		{
+			"method": "GET",
+			"path": "/device/{deviceId}/routes",
+			"operationId": "listDeviceRoutes",
+			"tag": "Devices",
+			"summary": "List device routes",
+			"scopes": [
+				"devices:routes:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "1f8ed1c78b72a43e"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/routes",
+			"operationId": "setDeviceRoutes",
+			"tag": "Devices",
+			"summary": "Set device routes",
+			"scopes": [
+				"devices:routes"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "92f863c85d88a80a"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/authorized",
+			"operationId": "authorizeDevice",
+			"tag": "Devices",
+			"summary": "Authorize device",
+			"scopes": [
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "4fb5ed0d17dd4654"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/name",
+			"operationId": "setDeviceName",
+			"tag": "Devices",
+			"summary": "Set device name",
+			"scopes": [
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "7de895a49bffda61"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/tags",
+			"operationId": "setDeviceTags",
+			"tag": "Devices",
+			"summary": "Set device tags",
+			"scopes": [
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "32428bc73427f753"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/key",
+			"operationId": "updateDeviceKey",
+			"tag": "Devices",
+			"summary": "Update device key",
+			"scopes": [
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "8a003d245507756b"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/ip",
+			"operationId": "setDeviceIp",
+			"tag": "Devices",
+			"summary": "Set device IPv4 address",
+			"scopes": [
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "03d7b542e4c5fd44"
+		},
+		{
+			"method": "GET",
+			"path": "/device/{deviceId}/attributes",
+			"operationId": "getDevicePostureAttributes",
+			"tag": "Devices",
+			"summary": "Get device posture attributes",
+			"scopes": [
+				"devices:posture_attributes:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "830ace4c03a6fe33"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/attributes/{attributeKey}",
+			"operationId": "setCustomDevicePostureAttributes",
+			"tag": "Devices",
+			"summary": "Set custom device posture attributes",
+			"scopes": [
+				"devices:posture_attributes"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "1eaa3c57961ef97d"
+		},
+		{
+			"method": "DELETE",
+			"path": "/device/{deviceId}/attributes/{attributeKey}",
+			"operationId": "deleteCustomDevicePostureAttributes",
+			"tag": "Devices",
+			"summary": "Delete custom device posture attributes",
+			"scopes": [
+				"devices:posture_attributes"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "dace21e22ca5e4ae"
+		},
+		{
+			"method": "GET",
+			"path": "/device/{deviceId}/device-invites",
+			"operationId": "listDeviceInvites",
+			"tag": "DeviceInvites",
+			"summary": "List device invites",
+			"scopes": [
+				"device_invites:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "39b4ba3eb3506b63"
+		},
+		{
+			"method": "POST",
+			"path": "/device/{deviceId}/device-invites",
+			"operationId": "createDeviceInvites",
+			"tag": "DeviceInvites",
+			"summary": "Create device invites",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "a3bc6129360979ae"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/user-invites",
+			"operationId": "listUserInvites",
+			"tag": "UserInvites",
+			"summary": "List user invites",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "a006ff7061c713ee"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/user-invites",
+			"operationId": "createUserInvites",
+			"tag": "UserInvites",
+			"summary": "Create user invites",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "8a877f4e0a9821ab"
+		},
+		{
+			"method": "GET",
+			"path": "/user-invites/{userInviteId}",
+			"operationId": "getUserInvite",
+			"tag": "UserInvites",
+			"summary": "Get a user invite",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "57573395297e1066"
+		},
+		{
+			"method": "DELETE",
+			"path": "/user-invites/{userInviteId}",
+			"operationId": "deleteUserInvite",
+			"tag": "UserInvites",
+			"summary": "Delete a user invite",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "23d6501998aab478"
+		},
+		{
+			"method": "POST",
+			"path": "/user-invites/{userInviteId}/resend",
+			"operationId": "resendUserInvite",
+			"tag": "UserInvites",
+			"summary": "Resend a user invite",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "4cbe8fc8a5634b37"
+		},
+		{
+			"method": "GET",
+			"path": "/device-invites/{deviceInviteId}",
+			"operationId": "getDeviceInvite",
+			"tag": "DeviceInvites",
+			"summary": "Get a device invite",
+			"scopes": [
+				"device_invites:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "f65cc3cdfdec1020"
+		},
+		{
+			"method": "DELETE",
+			"path": "/device-invites/{deviceInviteId}",
+			"operationId": "deleteDeviceInvite",
+			"tag": "DeviceInvites",
+			"summary": "Delete a device invite",
+			"scopes": [
+				"device_invites"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "7f5356efed01c30f"
+		},
+		{
+			"method": "POST",
+			"path": "/device-invites/{deviceInviteId}/resend",
+			"operationId": "resendDeviceInvite",
+			"tag": "DeviceInvites",
+			"summary": "Resend a device invite",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "6ca6051f63303b3e"
+		},
+		{
+			"method": "POST",
+			"path": "/device-invites/-/accept",
+			"operationId": "acceptDeviceInvite",
+			"tag": "DeviceInvites",
+			"summary": "Accept a device invite",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "9d091d67314da21a"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/logging/configuration",
+			"operationId": "listConfigurationAuditLogs",
+			"tag": "Logging",
+			"summary": "List configuration audit logs",
+			"scopes": [
+				"logs:configuration:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "a6fb1aa3e9a78705"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/logging/network",
+			"operationId": "listNetworkFlowLogs",
+			"tag": "Logging",
+			"summary": "List network flow logs",
+			"scopes": [
+				"logs:network:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "337dbfec72c18154"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/logging/{logType}/stream/status",
+			"operationId": "getLogStreamingStatus",
+			"tag": "Logging",
+			"summary": "Get log streaming status",
+			"scopes": [
+				"log_streaming:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "8f3364a92b24f496"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/logging/{logType}/stream",
+			"operationId": "getLogStreamingConfiguration",
+			"tag": "Logging",
+			"summary": "Get log streaming configuration",
+			"scopes": [
+				"log_streaming:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "e2fc5ca5eb50927b"
+		},
+		{
+			"method": "PUT",
+			"path": "/tailnet/{tailnet}/logging/{logType}/stream",
+			"operationId": "setLogStreamingConfiguration",
+			"tag": "Logging",
+			"summary": "Set log streaming configuration",
+			"scopes": [
+				"log_streaming",
+				"device_invites",
+				"policy_file"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "d2fd3d04120d0c4a"
+		},
+		{
+			"method": "DELETE",
+			"path": "/tailnet/{tailnet}/logging/{logType}/stream",
+			"operationId": "disableLogStreaming",
+			"tag": "Logging",
+			"summary": "Disable log streaming",
+			"scopes": [
+				"log_streaming"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "b0e6d15cfec09320"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/aws-external-id",
+			"operationId": "getAwsExternalId",
+			"tag": "Logging",
+			"summary": "Create or get AWS external id",
+			"scopes": [
+				"log_streaming"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "46a420378bad6cfe"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/aws-external-id/{id}/validate-aws-trust-policy",
+			"operationId": "validateAwsExternalId",
+			"tag": "Logging",
+			"summary": "Validate external ID integration with IAM role trust policy",
+			"scopes": [
+				"log_streaming"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "7ad4c4b30e62db70"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/dns/nameservers",
+			"operationId": "listDnsNameservers",
+			"tag": "DNS",
+			"summary": "List DNS nameservers",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c510c1674bb9201c"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/dns/nameservers",
+			"operationId": "setDnsNameservers",
+			"tag": "DNS",
+			"summary": "Set DNS nameservers",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c015796abcdfd911"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/dns/preferences",
+			"operationId": "getDnsPreferences",
+			"tag": "DNS",
+			"summary": "Get DNS preferences",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "22aa4e7452563471"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/dns/preferences",
+			"operationId": "setDnsPreferences",
+			"tag": "DNS",
+			"summary": "Set DNS preferences",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "7220ae2f7c13c45a"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/dns/searchpaths",
+			"operationId": "listDnsSearchPaths",
+			"tag": "DNS",
+			"summary": "List DNS search paths",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "881c828ce5e973bc"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/dns/searchpaths",
+			"operationId": "setDnsSearchPaths",
+			"tag": "DNS",
+			"summary": "Set DNS search paths",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "a75fe3afd77337bb"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/dns/split-dns",
+			"operationId": "getSplitDns",
+			"tag": "DNS",
+			"summary": "Get split DNS",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "ced4cd2d44843cf6"
+		},
+		{
+			"method": "PUT",
+			"path": "/tailnet/{tailnet}/dns/split-dns",
+			"operationId": "setSplitDns",
+			"tag": "DNS",
+			"summary": "Set split DNS",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "672fee7f7f418d57"
+		},
+		{
+			"method": "PATCH",
+			"path": "/tailnet/{tailnet}/dns/split-dns",
+			"operationId": "updateSplitDns",
+			"tag": "DNS",
+			"summary": "Update split DNS",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "e7277420bf1e0b11"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/dns/configuration",
+			"operationId": "getDnsConfiguration",
+			"tag": "DNS",
+			"summary": "Get DNS configuration",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c97e9b8fd03fedc7"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/dns/configuration",
+			"operationId": "setDnsConfiguration",
+			"tag": "DNS",
+			"summary": "Set DNS configuration",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "79889f243171399b"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/keys",
+			"operationId": "listTailnetKeys",
+			"tag": "Keys",
+			"summary": "List tailnet keys",
+			"scopes": [
+				"api_access_tokens:read",
+				"auth_keys:read",
+				"oauth_keys:read",
+				"federated_keys:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "ce5484bf4edb1210"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/keys",
+			"operationId": "createKey",
+			"tag": "Keys",
+			"summary": "Create an auth key or trust credential",
+			"scopes": [
+				"auth_keys",
+				"oauth_keys",
+				"federated_keys"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "d700c7464625746c"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/keys/{keyId}",
+			"operationId": "getKey",
+			"tag": "Keys",
+			"summary": "Get key",
+			"scopes": [
+				"api_access_tokens:read",
+				"auth_keys:read",
+				"oauth_keys:read",
+				"federated_keys:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "ace34a3d7eafb63e"
+		},
+		{
+			"method": "PUT",
+			"path": "/tailnet/{tailnet}/keys/{keyId}",
+			"operationId": "setKey",
+			"tag": "Keys",
+			"summary": "Set key",
+			"scopes": [
+				"oauth_keys",
+				"federated_keys"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "bbd314885f96ba8a"
+		},
+		{
+			"method": "DELETE",
+			"path": "/tailnet/{tailnet}/keys/{keyId}",
+			"operationId": "deleteKey",
+			"tag": "Keys",
+			"summary": "Delete key",
+			"scopes": [
+				"api_access_tokens",
+				"auth_keys",
+				"oauth_keys",
+				"federated_keys"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "4e48846cf3621f09"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/acl",
+			"operationId": "getPolicyFile",
+			"tag": "PolicyFile",
+			"summary": "Get policy file",
+			"scopes": [
+				"policy_file:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "5bececa147348ff8"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/acl",
+			"operationId": "setPolicyFile",
+			"tag": "PolicyFile",
+			"summary": "Set policy file",
+			"scopes": [
+				"policy_file"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c64ca4f5319c4924"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/acl/preview",
+			"operationId": "previewRuleMatches",
+			"tag": "PolicyFile",
+			"summary": "Preview rule matches",
+			"scopes": [],
+			"badges": [],
+			"deprecated": false,
+			"fp": "d24d8e4fd87f7e6c"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/acl/validate",
+			"operationId": "validateAndTestPolicyFile",
+			"tag": "PolicyFile",
+			"summary": "Validate and test policy file",
+			"scopes": [
+				"policy_file:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "6ccd76356b12c978"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/posture/integrations",
+			"operationId": "getPostureIntegrations",
+			"tag": "DevicePosture",
+			"summary": "List all posture integrations",
+			"scopes": [
+				"feature_settings:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "31e68109a9249292"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/posture/integrations",
+			"operationId": "createPostureIntegration",
+			"tag": "DevicePosture",
+			"summary": "Create a posture integration",
+			"scopes": [
+				"feature_settings"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "ec957d09a5c0b222"
+		},
+		{
+			"method": "GET",
+			"path": "/posture/integrations/{id}",
+			"operationId": "getPostureIntegration",
+			"tag": "DevicePosture",
+			"summary": "Get a posture integration",
+			"scopes": [
+				"feature_settings:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "a1de8a38fb376c73"
+		},
+		{
+			"method": "PATCH",
+			"path": "/posture/integrations/{id}",
+			"operationId": "updatePostureIntegration",
+			"tag": "DevicePosture",
+			"summary": "Update a posture integration",
+			"scopes": [
+				"feature_settings"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c38b3bf121c3508a"
+		},
+		{
+			"method": "DELETE",
+			"path": "/posture/integrations/{id}",
+			"operationId": "deletePostureIntegration",
+			"tag": "DevicePosture",
+			"summary": "Delete a posture integration",
+			"scopes": [
+				"feature_settings"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "82afb21f41081329"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/users",
+			"operationId": "listUsers",
+			"tag": "Users",
+			"summary": "List users",
+			"scopes": [
+				"users:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "28fb5f17b2555a09"
+		},
+		{
+			"method": "GET",
+			"path": "/users/{userId}",
+			"operationId": "getUser",
+			"tag": "Users",
+			"summary": "Get a user",
+			"scopes": [
+				"users:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "62e21b063c34ddfd"
+		},
+		{
+			"method": "POST",
+			"path": "/users/{userId}/role",
+			"operationId": "updateUserRole",
+			"tag": "Users",
+			"summary": "Update user role",
+			"scopes": [
+				"users"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "4781f94e7e77549a"
+		},
+		{
+			"method": "POST",
+			"path": "/users/{userId}/approve",
+			"operationId": "approveUser",
+			"tag": "Users",
+			"summary": "Approve a user",
+			"scopes": [
+				"users"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c19415c5faac98f6"
+		},
+		{
+			"method": "POST",
+			"path": "/users/{userId}/suspend",
+			"operationId": "suspendUser",
+			"tag": "Users",
+			"summary": "Suspend a user",
+			"scopes": [
+				"users"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "80d2e7e30891ce0d"
+		},
+		{
+			"method": "POST",
+			"path": "/users/{userId}/restore",
+			"operationId": "restoreUser",
+			"tag": "Users",
+			"summary": "Restore a user",
+			"scopes": [
+				"users"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c6c1998df6a41b6b"
+		},
+		{
+			"method": "POST",
+			"path": "/users/{userId}/delete",
+			"operationId": "deleteUser",
+			"tag": "Users",
+			"summary": "Delete a user",
+			"scopes": [
+				"users"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "9c9588fd802d5ecb"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/contacts",
+			"operationId": "getContacts",
+			"tag": "Contacts",
+			"summary": "Get contacts",
+			"scopes": [
+				"account_settings:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "cafca1cffeb10c3d"
+		},
+		{
+			"method": "PATCH",
+			"path": "/tailnet/{tailnet}/contacts/{contactType}",
+			"operationId": "updateContact",
+			"tag": "Contacts",
+			"summary": "Update contact",
+			"scopes": [
+				"account_settings"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "8ca540e7d3ee777e"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/contacts/{contactType}/resend-verification-email",
+			"operationId": "resendContactVerificationEmail",
+			"tag": "Contacts",
+			"summary": "Resend verification email",
+			"scopes": [
+				"account_settings"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "2701f7117ac5b403"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/webhooks",
+			"operationId": "listWebhooks",
+			"tag": "Webhooks",
+			"summary": "List webhooks",
+			"scopes": [
+				"webhooks:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "28a50967f3eba6e8"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/webhooks",
+			"operationId": "createWebhook",
+			"tag": "Webhooks",
+			"summary": "Create a webhook",
+			"scopes": [
+				"webhooks"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "c17ae7178321cf89"
+		},
+		{
+			"method": "GET",
+			"path": "/webhooks/{endpointId}",
+			"operationId": "getWebhook",
+			"tag": "Webhooks",
+			"summary": "Get webhook",
+			"scopes": [
+				"webhooks:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "e33341155f72c59d"
+		},
+		{
+			"method": "PATCH",
+			"path": "/webhooks/{endpointId}",
+			"operationId": "updateWebhook",
+			"tag": "Webhooks",
+			"summary": "Update webhook",
+			"scopes": [
+				"webhooks"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "a5adf4f0c1878ee5"
+		},
+		{
+			"method": "DELETE",
+			"path": "/webhooks/{endpointId}",
+			"operationId": "deleteWebhook",
+			"tag": "Webhooks",
+			"summary": "Delete webhook",
+			"scopes": [
+				"webhooks"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "d689e6842e5be3df"
+		},
+		{
+			"method": "POST",
+			"path": "/webhooks/{endpointId}/test",
+			"operationId": "testWebhook",
+			"tag": "Webhooks",
+			"summary": "Test a webhook",
+			"scopes": [
+				"webhooks"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "523e2ba236ee43a6"
+		},
+		{
+			"method": "POST",
+			"path": "/webhooks/{endpointId}/rotate",
+			"operationId": "rotateWebhookSecret",
+			"tag": "Webhooks",
+			"summary": "Rotate webhook secret",
+			"scopes": [
+				"webhooks"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "7de11fda3cda2fa0"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/settings",
+			"operationId": "getTailnetSettings",
+			"tag": "TailnetSettings",
+			"summary": "Get tailnet settings",
+			"scopes": [
+				"feature_settings:read",
+				"logs:network:read",
+				"networking_settings:read",
+				"policy_file:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "17216932fd67791b"
+		},
+		{
+			"method": "PATCH",
+			"path": "/tailnet/{tailnet}/settings",
+			"operationId": "updateTailnetSettings",
+			"tag": "TailnetSettings",
+			"summary": "Update tailnet settings",
+			"scopes": [
+				"feature_settings",
+				"logs:network",
+				"networking_settings",
+				"policy_file"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "fc66924ee6d3b6d1"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/services",
+			"operationId": "listServices",
+			"tag": "Services",
+			"summary": "List all Services",
+			"scopes": [
+				"services:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "35e775a4344d72b0"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/services/{serviceName}",
+			"operationId": "getService",
+			"tag": "Services",
+			"summary": "Get a Service",
+			"scopes": [
+				"services:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "aac32f7b571d151f"
+		},
+		{
+			"method": "PUT",
+			"path": "/tailnet/{tailnet}/services/{serviceName}",
+			"operationId": "updateService",
+			"tag": "Services",
+			"summary": "Update a Service",
+			"scopes": [
+				"services"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "29122085e7ce60d0"
+		},
+		{
+			"method": "DELETE",
+			"path": "/tailnet/{tailnet}/services/{serviceName}",
+			"operationId": "deleteService",
+			"tag": "Services",
+			"summary": "Delete a Service",
+			"scopes": [
+				"services"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "6bf9583303a92f42"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/services/{serviceName}/devices",
+			"operationId": "listServiceHosts",
+			"tag": "Services",
+			"summary": "List devices hosting a Service",
+			"scopes": [
+				"services",
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "1cac1df6ac3aa053"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/services/{serviceName}/device/{deviceId}/approved",
+			"operationId": "getServiceDeviceApproval",
+			"tag": "Services",
+			"summary": "Get approval status of Service on a device",
+			"scopes": [
+				"services",
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "5d692a29f94917d4"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/services/{serviceName}/device/{deviceId}/approved",
+			"operationId": "updateServiceDeviceApproval",
+			"tag": "Services",
+			"summary": "Update approval status of Service on a device",
+			"scopes": [
+				"services",
+				"devices:core"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "a3cc62fdf700c8fa"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/oauth-apps",
+			"operationId": "listOAuthApps",
+			"tag": "OAuthApps",
+			"summary": "List OAuth apps",
+			"scopes": [
+				"oauth_apps:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "5280bd3cc912d67a"
+		},
+		{
+			"method": "POST",
+			"path": "/tailnet/{tailnet}/oauth-apps",
+			"operationId": "createOAuthApp",
+			"tag": "OAuthApps",
+			"summary": "Create an OAuth app",
+			"scopes": [
+				"oauth_apps",
+				"devices:posture_attributes"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "73ab42f7b974d4d3"
+		},
+		{
+			"method": "GET",
+			"path": "/tailnet/{tailnet}/oauth-apps/{appId}",
+			"operationId": "getOAuthApp",
+			"tag": "OAuthApps",
+			"summary": "Get OAuth app",
+			"scopes": [
+				"oauth_apps:read"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "583e190e8ea36b6b"
+		},
+		{
+			"method": "PUT",
+			"path": "/tailnet/{tailnet}/oauth-apps/{appId}",
+			"operationId": "updateOAuthApp",
+			"tag": "OAuthApps",
+			"summary": "Update OAuth app",
+			"scopes": [
+				"oauth_apps"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "aa0b27209d8e095e"
+		},
+		{
+			"method": "DELETE",
+			"path": "/tailnet/{tailnet}/oauth-apps/{appId}",
+			"operationId": "deleteOAuthApp",
+			"tag": "OAuthApps",
+			"summary": "Delete OAuth app",
+			"scopes": [
+				"oauth_apps"
+			],
+			"badges": [],
+			"deprecated": false,
+			"fp": "10d47ccdb1b81688"
+		},
+		{
+			"method": "GET",
+			"path": "/organizations/{organization}/tailnets",
+			"operationId": "listOrganizationTailnets",
+			"tag": "Organizations",
+			"summary": "List tailnets",
+			"scopes": [
+				"tailnets:read"
+			],
+			"badges": [
+				"Alpha"
+			],
+			"deprecated": false,
+			"fp": "89ebee60aaf4564c"
+		},
+		{
+			"method": "POST",
+			"path": "/organizations/{organization}/tailnets",
+			"operationId": "createOrganizationTailnet",
+			"tag": "Organizations",
+			"summary": "Create a tailnet",
+			"scopes": [
+				"tailnets"
+			],
+			"badges": [
+				"Alpha"
+			],
+			"deprecated": false,
+			"fp": "7ca451625c4bf653"
+		}
+	]
+}
