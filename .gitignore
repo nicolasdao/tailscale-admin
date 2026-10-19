@@ -1,0 +1,27 @@
+# Internal working specs contain private infrastructure details (account IDs,
+# device names, CIDRs). Kept out of the public repository until reviewed.
+specs/
+
+# Secrets and credentials: never commit
+.env
+.env.*
+*.env
+!*.example.env
+secrets*
+*.key
+*.pem
+
+# Live tailnet data (policy dumps, device/user lists) must never be committed
+*.hujson
+!test/fixtures/**/*.hujson
+*.policy.json
+tailnet-dump*
+
+# Tooling
+node_modules/
+.cache/
+*.log
+.DS_Store
+
+# Facts about the real tailnet (baseline, names, tags): never public
+private/
