@@ -131,3 +131,75 @@ describe('unified diff', () => {
 		assert.ok(d.includes('\n+x'))
 	})
 })
+
+describe('replace-rule', () => {
+	const original = fixture('sample-default.hujson')
+	const ALL = { src: ['*'], dst: ['*'], ip: ['*'] }
+	const MEMBERS = { src: ['autogroup:member'], dst: ['*'], ip: ['*'] }
+
+	it('replaces the rule and its comment block in place, leaving the next comment alone', () => {
+		const ed = new PolicyEditor(original)
+		assert.equal(ed.replaceRule(ALL, MEMBERS, 'Your devices reach everything.'), true)
+		ed.verify(['grants'])
+		assert.ok(ed.text.includes('\t\t// Your devices reach everything.\n\t\t{"src": ["autogroup:member"], "dst": ["*"], "ip": ["*"]},\n\n\t\t// Allow users in "group:example"'))
+		assert.ok(!ed.text.includes('Allow all connections'))
+		assert.ok(ed.text.includes('// Example/default ACLs'))
+		assert.deepEqual(parsePolicy(ed.text).grants, [MEMBERS])
+	})
+
+	it('without --comment, keeps the comment lines and swaps only the rule line', () => {
+		const ed = new PolicyEditor(original)
+		ed.replaceRule(ALL, MEMBERS)
+		assert.ok(ed.text.includes('// Allow all connections.'))
+		assert.equal(ed.text.split('\n').length, original.split('\n').length)
+	})
+
+	it('is idempotent, and refuses when neither rule exists', () => {
+		const ed = new PolicyEditor(original)
+		ed.replaceRule(ALL, MEMBERS, 'x')
+		const again = new PolicyEditor(ed.text)
+		assert.equal(again.replaceRule(ALL, MEMBERS, 'x'), false)
+		assert.throws(() => again.replaceRule({ src: ['nope'] }, { src: ['other'] }), /No rule exactly matching/)
+	})
+
+	it('replaces a multi-line rule object as a whole', () => {
+		const ed = new PolicyEditor(fixture('sample-grants.hujson'))
+		ed.replaceRule({ src: ['autogroup:admin'], dst: ['*'], ip: ['*'] }, MEMBERS)
+		ed.verify(['grants'])
+		assert.deepEqual(parsePolicy(ed.text).grants, [MEMBERS])
+		assert.ok(ed.text.includes('// Admins reach everything'))
+	})
+})
+
+describe('ensure-test / remove-test', () => {
+	const original = fixture('sample-default.hujson')
+
+	it('creates the tests section, then merges into an existing test for the same src', () => {
+		const ed = new PolicyEditor(original)
+		ed.ensureTest('alice@example.com', ['10.0.0.1:5432'])
+		ed.ensureTest('tag:router', [], ['100.64.0.1:22'])
+		ed.ensureTest('alice@example.com', ['10.0.0.2:5432'], ['100.64.0.9:22'])
+		ed.verify(['tests'])
+		const tests = parsePolicy(ed.text).tests
+		assert.deepEqual(tests, [
+			{ src: 'alice@example.com', accept: ['10.0.0.1:5432', '10.0.0.2:5432'], deny: ['100.64.0.9:22'] },
+			{ src: 'tag:router', deny: ['100.64.0.1:22'] },
+		])
+		assert.ok(ed.text.includes('// Test access rules every time'))
+	})
+
+	it('is idempotent and removal round-trips', () => {
+		const ed = new PolicyEditor(original)
+		ed.ensureTest('tag:router', [], ['100.64.0.1:22'])
+		const again = new PolicyEditor(ed.text)
+		assert.equal(again.ensureTest('tag:router', [], ['100.64.0.1:22']), false)
+		assert.equal(again.removeTest('tag:router'), true)
+		again.verify(['tests'])
+		assert.deepEqual(parsePolicy(again.text).tests, [])
+		assert.equal(again.removeTest('tag:router'), false)
+	})
+
+	it('needs at least one accept or deny entry', () => {
+		assert.throws(() => new PolicyEditor(original).ensureTest('x'), /at least one/)
+	})
+})

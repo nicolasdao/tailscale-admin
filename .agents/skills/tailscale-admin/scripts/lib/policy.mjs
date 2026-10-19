@@ -164,6 +164,87 @@ export class PolicyEditor {
 		return false
 	}
 
+	// Replace one access rule (exact match in grants or acls) in place, on its own line.
+	// With `comment`, the contiguous // comment lines directly above the rule are replaced too
+	// (they usually describe the old rule). Idempotent: if `from` is gone and `to` exists, no-op.
+	replaceRule(from, to, comment) {
+		for (const section of ['grants', 'acls']) {
+			const rules = this.value([section]) || []
+			const idx = rules.findIndex(r => same(r, from))
+			if (idx === -1) continue
+			const n = this.node([section, idx])
+			let start = this.text.lastIndexOf('\n', n.offset) + 1
+			const ind = this.text.slice(start, n.offset)
+			const nl = this.text.indexOf('\n', n.offset + n.length)
+			const after = this.text.slice(n.offset + n.length, nl)
+			if (ind.trim() || !/^\s*,?\s*$/.test(after)) throw new TsaError('policy_shape', 'The rule to replace shares its line with other text or a comment; edit it by hand.')
+			if (comment !== undefined) {
+				// Walk up over the comment lines immediately above (no blank line in between).
+				for (;;) {
+					const prevEnd = start - 1
+					if (prevEnd < 0) break
+					const prevStart = this.text.lastIndexOf('\n', prevEnd - 1) + 1
+					if (!/^\s*\/\//.test(this.text.slice(prevStart, prevEnd))) break
+					start = prevStart
+				}
+			}
+			const oldBlock = this.text.slice(start, nl)
+			const newLines = [...(comment ? comment.split('\n').map(c => `${ind}// ${c}`) : []), `${ind}${j(to)},`]
+			this.removed = [...(this.removed || []), ...oldBlock.split('\n')]
+			this.text = this.text.slice(0, start) + newLines.join('\n') + this.text.slice(nl)
+			this.changes.push(`${section}: replace ${j(from)} with ${j(to)}${comment !== undefined ? ' (comment rewritten)' : ''}`)
+			return true
+		}
+		const present = ['grants', 'acls'].some(s => (this.value([s]) || []).some(r => same(r, to)))
+		if (present) return false
+		throw new TsaError('policy_rule_not_found', `No rule exactly matching ${j(from)} in grants or acls.`)
+	}
+
+	// Ensure a policy test exists for `src` that includes every `accept` and `deny` entry.
+	// Tests run on every save: Tailscale refuses any policy change that breaks them.
+	ensureTest(src, accept = [], deny = []) {
+		if (!accept.length && !deny.length) throw new TsaError('usage', 'A test needs at least one --accept or --deny entry (host:port).')
+		const tests = this.value(['tests'])
+		if (tests === undefined) {
+			const t = { src, ...(accept.length ? { accept } : {}), ...(deny.length ? { deny } : {}) }
+			this.appendMember([], `"tests": [\n${this.unit()}${j(t)},\n]`)
+			this.changes.push(`tests: add ${j(t)}`)
+			return true
+		}
+		const idx = tests.findIndex(t => t.src === src)
+		if (idx === -1) {
+			const t = { src, ...(accept.length ? { accept } : {}), ...(deny.length ? { deny } : {}) }
+			this.appendMember(['tests'], j(t))
+			this.changes.push(`tests: add ${j(t)}`)
+			return true
+		}
+		let changed = false
+		for (const [key, items] of [['accept', accept], ['deny', deny]]) {
+			if (!items.length) continue
+			const cur = this.value(['tests', idx, key])
+			if (cur === undefined) {
+				this.appendMember(['tests', idx], `${j(key)}: ${j(items)}`)
+				this.changes.push(`tests[${src}]: add ${key} ${items.join(', ')}`)
+				changed = true
+				continue
+			}
+			for (const item of items) {
+				if (!this.value(['tests', idx, key]).includes(item)) {
+					this.appendToArray(['tests', idx, key], item)
+					this.changes.push(`tests[${src}]: add ${key} ${item}`)
+					changed = true
+				}
+			}
+		}
+		return changed
+	}
+
+	removeTest(src) {
+		const idx = (this.value(['tests']) || []).findIndex(t => t.src === src)
+		if (idx === -1) return false
+		return this.removeWholeLines(['tests', idx], 'tests')
+	}
+
 	// Which access-rule section to append to: whatever the policy already uses.
 	ruleSection() {
 		const grants = this.value(['grants'])

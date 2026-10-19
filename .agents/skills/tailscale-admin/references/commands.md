@@ -17,6 +17,9 @@ Run every command as `node "${CLAUDE_SKILL_DIR}/scripts/tsa.mjs" <group> <verb> 
 | `policy ensure-exit-node-approver --approver A` | `autoApprovers.exitNode` gains A | `policy_file` |
 | `policy ensure-group --group group:G --member M...` | Creates the group or adds members | `policy_file` |
 | `policy ensure-rule --src S... --dst CIDR... --port P... [--proto tcp]` | Appends an access rule to `grants` (or to `acls` if the policy uses acls) | `policy_file` |
+| `policy replace-rule --from '<rule JSON>' --to '<rule JSON>' [--comment "text"]` | Swaps one rule (exact match in `grants` or `acls`) in place. `--comment` also rewrites the `//` lines directly above it (use `\n` in the text for several lines). If `from` is gone and `to` exists: `already_in_place` | `policy_file` |
+| `policy ensure-test --src S [--accept host:port...] [--deny host:port...]` | Adds a policy **test**, or merges into the existing test for S. Tailscale runs every test on every save and refuses changes that break them | `policy_file` |
+| `policy remove-test --src S` | Removes the test for S (whole lines only) | `policy_file` |
 | `policy remove-tag-owner --tag T` / `remove-auto-approver --route C` / `remove-rule --src S --dst C --port P` | Removes an entry **only if it sits alone on its own lines** (anything the ensure commands added qualifies) | `policy_file` |
 
 Every `ensure-*` and `remove-*` command returns `changes`, a unified `diff`, and the validation result. With `--apply` it writes with `If-Match`.

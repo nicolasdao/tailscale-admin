@@ -63,6 +63,14 @@ await check('recipe prepare dry run', () => {
 	expect(r.status === 'planned' && r.steps[0].validated, JSON.stringify(r).slice(0, 300))
 	return 'planned + validated'
 })
+await check('policy replace-rule refuses an unknown rule', () => { const r = tsa(['policy', 'replace-rule', '--from', '{"src":["tsa:none"]}', '--to', '{"src":["tsa:other"]}'], { allowExit: [1] }); expect(r.error?.code === 'policy_rule_not_found', 'not refused'); return 'refused' })
+// Policy-independent: whether Tailscale accepts this check depends on the tailnet's rules, so
+// either outcome passes as long as Tailscale validated it and nothing was written.
+await check('policy ensure-test (plan only, validated by Tailscale)', () => {
+	const r = tsa(['policy', 'ensure-test', '--src', 'autogroup:member', '--deny', '100.64.0.1:22'])
+	expect((r.status === 'planned' && r.validated) || (r.status === 'refused' && r.validation), JSON.stringify(r).slice(0, 300))
+	return r.status
+})
 await check('self-audit', () => { const r = tsa(['self-audit'], { allowExit: [3] }); return r.status })
 
 for (const r of results) console.log(`${r.pass ? 'PASS' : 'FAIL'}  ${r.name}${r.detail ? `  (${r.detail})` : ''}`)

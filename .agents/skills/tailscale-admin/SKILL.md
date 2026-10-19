@@ -83,6 +83,8 @@ Lead with the plain-English meaning; quote JSON values only if the user asks.
 | "Add a tag owner" | `policy ensure-tag-owner --tag T --owner O` |
 | "Let X reach Y on port P" | `policy ensure-rule --src X --dst CIDR --port P` |
 | "Who can reach …?" | `policy preview --type user\|ipport --for …` |
+| "Lock down the allow-all rule" | `policy replace-rule --from '{"src":["*"],"dst":["*"],"ip":["*"]}' --to '{"src":["autogroup:member"],"dst":["*"],"ip":["*"]}' --comment "…"`. Add `ensure-test` checks first so the save proves nothing breaks |
+| "Make sure X can always reach Y" / "X must never reach Y" | `policy ensure-test --src X --accept Y:port` / `--deny Y:port` |
 | "Disable key expiry on the router" | `devices key-expiry --device D --disable` |
 | Anything else in the API | `api list`, then `api <METHOD> <path>` |
 
@@ -97,6 +99,7 @@ Lead with the plain-English meaning; quote JSON values only if the user asks.
 - **Re-joins create `hostname-1` devices.** `finish` refuses until the stale ones are deleted.
 - **`GET /keys` without `all=true` lists only OAuth clients for an OAuth token.** `keys list` passes it.
 - **A 403 "feature not available on current billing plan"** means plan gating (log streaming, network flow logs, custom posture attributes).
+- **Policy `tests` are enforced on every save.** A change that breaks one comes back `refused` with the failing test in `validation`. That is the safety net working. To deliberately widen access (e.g. undo a lockdown), remove or adjust the blocking test first, with the user's agreement. A test whose `src` names a tag missing from `tagOwners` fails **every** test ("tag not found"), so add the tag owner first.
 - **The API documents no rate limits.** `tsa` backs off on 429 and 5xx, honouring `Retry-After`.
 
 ## Constraints

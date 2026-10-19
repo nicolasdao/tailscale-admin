@@ -6,6 +6,17 @@ import { assertCidr, policyWrite, readPolicy, tn, validatePolicy } from '../lib/
 import { TsaError } from '../lib/out.mjs'
 import { parsePolicy } from '../lib/policy.mjs'
 
+function jsonFlag(flags, name) {
+	const raw = one(flags, name, `'<rule as JSON>'`)
+	try {
+		const v = JSON.parse(raw)
+		if (!v || typeof v !== 'object' || Array.isArray(v)) throw new Error()
+		return v
+	} catch {
+		throw new TsaError('usage', `--${name} must be one rule as a JSON object, e.g. '{"src": ["*"], "dst": ["*"], "ip": ["*"]}'.`)
+	}
+}
+
 const shape = (v) => Array.isArray(v) ? `array[${v.length}]` : v && typeof v === 'object' ? `object{${Object.keys(v).length}}` : typeof v
 
 export async function run(_group, [verb], flags) {
@@ -71,6 +82,19 @@ export async function run(_group, [verb], flags) {
 			const src = list(need(flags, 'src')), dst = list(need(flags, 'dst')).map(assertCidr), ports = list(need(flags, 'port'))
 			const proto = flags.proto && flags.proto !== true ? String(flags.proto) : 'tcp'
 			return { ok: true, ...(await policyWrite(o, ed => ed.removeAccessRule(src, dst, ports, proto), ['grants', 'acls'])) }
+		}
+		case 'replace-rule': {
+			const from = jsonFlag(flags, 'from'), to = jsonFlag(flags, 'to')
+			const comment = flags.comment !== undefined && flags.comment !== true ? String(flags.comment) : undefined
+			return { ok: true, ...(await policyWrite(o, ed => ed.replaceRule(from, to, comment), ['grants', 'acls'])) }
+		}
+		case 'ensure-test': {
+			const src = one(flags, 'src', '<user email, group or tag>')
+			return { ok: true, ...(await policyWrite(o, ed => ed.ensureTest(src, list(flags.accept), list(flags.deny)), ['tests'])) }
+		}
+		case 'remove-test': {
+			const src = one(flags, 'src')
+			return { ok: true, ...(await policyWrite(o, ed => ed.removeTest(src), ['tests'])) }
 		}
 		default:
 			throw new TsaError('usage', `Unknown policy verb "${verb}". Run: node tsa.mjs policy --help`)

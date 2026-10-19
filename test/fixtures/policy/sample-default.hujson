@@ -1,0 +1,18 @@
+// Example/default ACLs for unrestricted connections.
+{
+	"grants": [
+		// Allow all connections.
+		// Comment this section out if you want to define specific restrictions.
+		{"src": ["*"], "dst": ["*"], "ip": ["*"]},
+
+		// Allow users in "group:example" to access "tag:example".
+		// {"src": ["group:example"], "dst": ["tag:example"], "ip": ["*"]},
+	],
+
+	"tagOwners": {
+		"tag:router": ["autogroup:admin"],
+	},
+
+	// Test access rules every time they're saved.
+	// "tests": [],
+}

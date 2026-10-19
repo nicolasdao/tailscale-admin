@@ -1,6 +1,6 @@
 {
 	"name": "tailscale-admin",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Administer a Tailscale tailnet through its API: comment-preserving policy file edits, auth keys, devices, subnet routes, DNS, plus a subnet-router recipe and generic access to every API operation.",
 	"type": "skill",
 	"authors": [
